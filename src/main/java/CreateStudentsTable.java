@@ -1,22 +1,27 @@
+
 import java.sql.Connection;
 import java.sql.Statement;
 
-public class JDBCDemo {
+public class CreateStudentsTable {
     public static void main(String[] args) {
 
         try {
             Connection connection = DBConnection.getConnection();
 
-            System.out.println("Database connected successfully!");
-
             Statement statement = connection.createStatement();
 
-            System.out.println("Statement created successfully!");
+            String sql = "CREATE TABLE students (" +
+                    "id INT PRIMARY KEY, " +
+                    "firstname VARCHAR(50), " +
+                    "lastname VARCHAR(50), " +
+                    "grade INT)";
+
+            statement.executeUpdate(sql);
+
+            System.out.println("Students table created successfully!");
 
             statement.close();
             connection.close();
-
-            System.out.println("Connection closed successfully!");
 
         } catch (Exception e) {
             e.printStackTrace();
